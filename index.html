@@ -1,12 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>tic- tack</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
+
 <body>
-    
-    
+
+    <div class="main">
+        <h2>Tic-tack-Toe</h2>
+        <p id="current-player">Current player:player1</p>
+        <div class="game">
+
+            <div class="cell" onclick="makeMove(0)"></div>
+            <div class="cell" onclick="makeMove(1)"></div>
+            <div class="cell" onclick="makeMove(2)"></div>
+            <div class="cell" onclick="makeMove(3)"></div>
+            <div class="cell" onclick="makeMove(4)"></div>
+            <div class="cell" onclick="makeMove(5)"></div>
+            <div class="cell" onclick="makeMove(6)"></div>
+            <div class="cell" onclick="makeMove(7)"></div>
+            <div class="cell" onclick="makeMove(8)"></div>
+        </div>
+
+        <button type="reset" class="reset">Reset</button>
+    </div>
+
+    <script>
+        const board = [-1, -1, -1, -1, -1, -1, -1, -1, -1];
+
+        let currentPlayer = "player1";
+        let gameOver = false;
+
+        const renderBoard = () => {
+
+            const allBoxes = document.querySelectorAll(".cell");
+            allBoxes.forEach((box, index) => {
+
+                if (board[index] === "player1") {
+                    box.innerText = "O";
+                }
+                else if (board[index] === "player2") {
+                    box.innerText = "X";
+                }
+                else {
+                    box.innerText = "";
+                }
+
+            })
+
+        };
+
+        const makeMove = (index) => {
+
+            if (gameOver) {
+                alert("pls reset the game")
+                return;
+            }
+
+            if (board[index] !== -1) {
+                alert("invalid move")
+                return;
+            }
+
+
+            board[index] = currentPlayer;
+            renderBoard();
+
+            const winner =checkWinner();
+
+
+
+            if(!board.include[-1]){
+                alert("game ddraw")
+                gameOver = true;
+                return;
+
+            }
+
+
+            if (currentPlayer === "player1") {
+                currentPlayer = "player2";
+
+            }
+            else {
+                currentPlayer = "player1";
+            }
+
+           document.getElementById("current-player").innerText =`current player:${currentPlayer}`;
+           
+
+
+
+        }
+
+        function isPlayerpresent(places,player){
+            const [a,b,c] =places;
+
+            return (
+                board[a] === player &&
+                board[b] === player &&
+                 board[c] === player
+            )
+        }
+
+        function checkWinner(){
+            const winningCombination =[
+                [0,1,2],
+                [3,4,5],
+                [6,7,8],
+                [0,3,6],
+                [1,4,7],
+                [2,5,8],
+                [0,4,8],
+                [2,4,6],
+
+            ];
+
+            for(let combination of winningCombination){
+                if(isPlayerpresent[combination,"player1"]){
+                    return "player1"
+                }
+
+                if(isPlayerpresent[combination,"player2"]){
+                    return "player2"
+                }
+
+                
+            }
+            return null;
+        }
+
+        function resetboard (){
+            board.fill[-1];
+            gameOver =false;
+
+          document.getElementById("currentplayer").innerText = `current player: `;
+          renderBoard();
+        }
+    </script>
+
+
+
+
 </body>
+
 </html>
