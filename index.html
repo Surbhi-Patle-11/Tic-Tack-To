@@ -42,12 +42,17 @@
 
                 if (board[index] === "player1") {
                     box.innerText = "O";
+                   box.style.color ="orange"
+                   box.style.backgroundColor = "#DDDDDD";
                 }
                 else if (board[index] === "player2") {
                     box.innerText = "X";
+                    box.style.color ="red"
+                    box.style.backgroundColor = "#BBD5DA";
                 }
                 else {
                     box.innerText = "";
+                     box.style.backgroundColor = "";
                 }
 
             })
