@@ -26,7 +26,7 @@
             <div class="cell" onclick="makeMove(8)"></div>
         </div>
 
-        <button type="reset" class="reset">Reset</button>
+        <button type="reset" class="reset" onclick="resetboard()">Reset</button>
     </div>
 
     <script>
@@ -71,10 +71,14 @@
             renderBoard();
 
             const winner =checkWinner();
+if (winner) {
+    alert(`${winner} wins!`);
+    gameOver = true;
+    return;
+}
 
 
-
-            if(!board.include[-1]){
+            if(!board.includes(-1)){
                 alert("game ddraw")
                 gameOver = true;
                 return;
@@ -121,11 +125,11 @@
             ];
 
             for(let combination of winningCombination){
-                if(isPlayerpresent[combination,"player1"]){
+                if(isPlayerpresent(combination,"player1")){
                     return "player1"
                 }
 
-                if(isPlayerpresent[combination,"player2"]){
+                if(isPlayerpresent(combination,"player2")){
                     return "player2"
                 }
 
@@ -135,10 +139,10 @@
         }
 
         function resetboard (){
-            board.fill[-1];
+            board.fill(-1);
             gameOver =false;
 
-          document.getElementById("currentplayer").innerText = `current player: `;
+          document.getElementById("current-player").innerText = `current player: `;
           renderBoard();
         }
     </script>
